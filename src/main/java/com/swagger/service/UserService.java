@@ -12,6 +12,7 @@ import com.swagger.repository.UserRepository;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -22,8 +23,12 @@ public class UserService {
     
     @Transactional
     public User createUser(User user) {
+    	String uuid = UUID.randomUUID().toString();
+    	long id = Math.abs(uuid.hashCode());
+    	user.setId(id);
         try {
             return userRepository.save(user);
+            
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to create user", e);
         }
