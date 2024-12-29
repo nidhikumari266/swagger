@@ -1,4 +1,6 @@
 package com.swagger.entity;
+import com.swagger.enumration.Role;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,8 @@ public class User {
     @NotNull
     private String email;
 
+    private Role role;
+    
     @Version
     private int version;
 
@@ -53,6 +57,14 @@ public class User {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
     
 }
