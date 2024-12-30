@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.swagger.entity.User;
+import com.swagger.enumration.Role;
 import com.swagger.globalexception.OptimisticLockingException;
 import com.swagger.repository.UserRepository;
 
@@ -63,5 +64,13 @@ public class UserService {
     
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+    
+    public List<User> searchUsers(String name, String email, Role role) {
+        return userRepository.searchUsers(
+            name == null || name.isBlank() ? null : name,
+            email == null || email.isBlank() ? null : email,
+            role
+        );
     }
 }
