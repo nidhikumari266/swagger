@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.swagger.entity.User;
+import com.swagger.enumration.Role;
 import com.swagger.service.UserService;
 
 import jakarta.transaction.Transactional;
@@ -49,4 +50,15 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> searchUsers(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) Role role) {
+        List<User> users = userService.searchUsers(name, email, role);
+        return ResponseEntity.ok(users);
+    }
+    
+    
 }
